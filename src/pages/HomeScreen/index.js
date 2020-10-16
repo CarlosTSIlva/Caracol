@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 
 import { StatusBar, View, Alert } from "react-native";
 import {
@@ -20,6 +20,7 @@ import { AppLoading } from "expo";
 
 import Input from "../../components/Input";
 import CheckBox from "../../components/checkBox";
+import api from "../../services/api";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -28,7 +29,7 @@ const fetchFonts = () => {
   });
 };
 
-const HomeScreen = () => {
+export default HomeScreen = () => {
   const [dataLoader, setdataLoader] = useState(false);
   const [check, setCheck] = useState(false);
   const formRef = useRef(null);
@@ -37,27 +38,33 @@ const HomeScreen = () => {
 
   const icon = !visible ? "eye-slash" : "eye";
 
-  async function handleSubmit(data) {
+  const handleSubmit = useCallback(async (data) => {
     try {
-      formRef.current.setErrors({});
+      formRef.current?.setErrors({});
+
       const schema = Yup.object().shape({
-        username: yup.string().required(),
-        password: Yup.string().min(6).required(),
+        username: Yup.string().min(3, "Nome obrigatório!"),
+
+        password: Yup.string().min(6, "Senha muito curta"),
       });
       await schema.validate(data, {
         abortEarly: false,
       });
-      console.log(data);
+
+      await api.get("/authenticateUsuario", data);
+      const casa = await api.get("/authenticateUsuario", data);
+      console.log(casa);
     } catch (err) {
-      const validationErrors = {};
-      if (err instanceof Yup.ValidationError) {
-        err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message;
-        });
-        formRef.current.setErrors(validationErrors);
+      if (err) {
+        if (err instanceof Yup.ValidationError) {
+          Alert.alert(
+            "Erro no login",
+            "Ocorreu um erro ao fazer longin, cheque as credenciais"
+          );
+        }
       }
     }
-  }
+  }, []);
 
   function handleCheck() {
     setCheck(!check);
@@ -95,10 +102,9 @@ const HomeScreen = () => {
           <Input
             name="username"
             type="username"
-            placeholder="E-mail"
+            placeholder="Username"
             autoCorrect={false}
             autoCapitalize="none"
-            keyboardType="email-address"
           />
 
           <View2>
@@ -161,5 +167,3 @@ const HomeScreen = () => {
     </>
   );
 };
-
-export default HomeScreen;
