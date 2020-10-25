@@ -1,9 +1,8 @@
 import React, { useState, useRef, useCallback } from "react";
 
-import { StatusBar, View, Alert } from "react-native";
+import { StatusBar, View, Text, Alert, Image, ScrollView } from "react-native";
 import {
   Container,
-  ImageI,
   Esquecisenha,
   EsquecisenhaText,
   View2,
@@ -18,9 +17,11 @@ import * as Yup from "yup";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
+import Folder from "../../components/Folder";
 import Input from "../../components/Input";
 import CheckBox from "../../components/checkBox";
 import api from "../../services/api";
+import { NavigationContainer } from "@react-navigation/native";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -29,7 +30,7 @@ const fetchFonts = () => {
   });
 };
 
-export default HomeScreen = () => {
+export default HomeScreen = ({ navigation }) => {
   const [dataLoader, setdataLoader] = useState(false);
   const [check, setCheck] = useState(false);
   const formRef = useRef(null);
@@ -39,6 +40,7 @@ export default HomeScreen = () => {
   const icon = !visible ? "eye-slash" : "eye";
 
   const handleSubmit = useCallback(async (data) => {
+    console.log(data);
     try {
       formRef.current?.setErrors({});
 
@@ -80,34 +82,65 @@ export default HomeScreen = () => {
   }
 
   return (
-    <>
+    <ScrollView>
       <StatusBar backgroundColor="black" />
+      <Folder />
+
       <Container>
-        <ImageI
-          source={{
-            uri: "https://image.flaticon.com/icons/png/512/604/604241.png",
-          }}
-        />
         <View>
-          <TextPurple style={{ fontFamily: "nunito-bold" }}>
-            Bem-vindo ao Caracol!
+          <TextPurple
+            style={{
+              fontFamily: "nunito-bold",
+              marginTop: 30,
+              marginLeft: -206,
+              fontSize: 14,
+            }}
+          >
+            Seja bem-vindo(a)
           </TextPurple>
 
-          <TextBlack style={{ fontFamily: "nunito-regular", fontSize: 16 }}>
-            A sua casa onde você estiver.
+          <TextBlack
+            style={{
+              fontFamily: "nunito-regular",
+              fontSize: 13,
+              marginBottom: 25,
+              marginLeft: -154,
+            }}
+          >
+            Faça seu login para continuar.
           </TextBlack>
         </View>
 
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <Input
-            name="username"
-            type="username"
-            placeholder="Username"
-            autoCorrect={false}
-            autoCapitalize="none"
-          />
-
           <View2>
+            <View>
+              <Input
+                style={{
+                  height: 50,
+                  width: 265,
+                  marginBottom: 15,
+                  paddingHorizontal: 12,
+                  paddingVertical: 16,
+                  marginTop: 20,
+                  marginLeft: -15,
+                  fontSize: 15,
+                }}
+                name="username"
+                type="username"
+                placeholder="username"
+                autoCorrect={false}
+                autoCapitalize="none"
+              />
+            </View>
+            <View>
+              <Image
+                style={{ width: 37, height: 32 }}
+                source={require("../../../assets/usericon.png")}
+              />
+            </View>
+          </View2>
+
+          <View2 style={{ marginBottom: 35 }}>
             <View>
               <Input
                 style={{
@@ -133,7 +166,7 @@ export default HomeScreen = () => {
                 name={icon}
                 color={"#9e9e9e"}
                 onPress={() => setVisibility(!visible)}
-                size={18}
+                size={30}
                 style={{
                   padding: 3,
                   textAlign: "center",
@@ -143,27 +176,27 @@ export default HomeScreen = () => {
             </View>
           </View2>
 
-          <Esquecisenha>
-            <EsquecisenhaText style={{ fontFamily: "nunito-regular" }}>
+          <Esquecisenha onPress={() => navigation.navigate("Reset")}>
+            <EsquecisenhaText style={{ fontFamily: "nunito-bold" }}>
               Esqueci a senha
             </EsquecisenhaText>
           </Esquecisenha>
 
           <CheckBox
             label="Mantenha-me conectado"
-            labelStyle={{ color: "#ffff", fontSize: 15 }}
-            iconColor="#ffff"
-            checkColor="#ffff"
+            labelStyle={{ color: "#000000", fontSize: 15 }}
+            iconColor="#000000"
+            checkColor="#000000"
             value={check}
             onChange={handleCheck}
           />
-          <ViewLogin
-            onPress={() => formRef.current.submitForm()}
-            title="Logar"
-            color="#9400d3"
-          />
+          <ViewLogin onPress={() => formRef.current.submitForm()} title="Logar">
+            <Text style={{ color: "#fff", fontFamily: "nunito-bold" }}>
+              Entrar
+            </Text>
+          </ViewLogin>
         </Form>
       </Container>
-    </>
+    </ScrollView>
   );
 };

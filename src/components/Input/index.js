@@ -46,9 +46,8 @@ function Input({ name, ...rest }) {
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: "#fff",
-    height: 50,
-    width: 300,
+    height: 560,
+    width: 327,
     marginBottom: 15,
     paddingHorizontal: 12,
     paddingVertical: 16,

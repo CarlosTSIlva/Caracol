@@ -57,7 +57,7 @@ export const ViewLogin = styled.TouchableOpacity`
   width: 327px;
   border-radius: 5px;
   background-color: #6f2da8;
-  margin-top: 120px;
+  margin-top: 293px;
   justify-content: center;
   align-items: center;
 `;

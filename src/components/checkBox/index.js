@@ -17,7 +17,7 @@ export default function CheckBox(props) {
         onPress={handleChange}
         style={[
           styles.CheckBox,
-          { borderColor: props.checkColor ? props.checkColor : "#fff" },
+          { borderColor: props.checkColor ? props.checkColor : "#000000" },
         ]}
       >
         {props.value ? (
@@ -25,7 +25,7 @@ export default function CheckBox(props) {
             name="check"
             style={{
               fontSize: 13,
-              color: props.iconColor ? props.iconColor : "#fff",
+              color: props.iconColor ? props.iconColor : "#000000",
             }}
           />
         ) : null}
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   LabelCheck: {
-    color: "#fff",
+    color: "#000000",
     marginLeft: 6,
   },
 });
