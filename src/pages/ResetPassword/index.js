@@ -15,9 +15,10 @@ import { Form } from "@unform/mobile";
 import * as Yup from "yup";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
-
+import api from "../../services/api";
 import Folder from "../../components/Folder";
 import Input from "../../components/Input";
+import normalize from "../../utils/normalize";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -26,13 +27,12 @@ const fetchFonts = () => {
   });
 };
 
-export default ResetPassword = ({ navigation }) => {
+const ResetPassword = ({ navigation }) => {
   const [dataLoader, setdataLoader] = useState(false);
   const [check, setCheck] = useState(false);
   const formRef = useRef(null);
 
   const handleSubmit = useCallback(async (data) => {
-    console.log(data);
     try {
       formRef.current?.setErrors({});
 
@@ -42,7 +42,8 @@ export default ResetPassword = ({ navigation }) => {
       await schema.validate(data, {
         abortEarly: false,
       });
-      navigation.navigate("FinishReset");
+      api.post("/forgotpassword", data);
+      navigation.navigate("FinishPassword");
       return;
     } catch (err) {
       if (err) {
@@ -79,9 +80,9 @@ export default ResetPassword = ({ navigation }) => {
           <TextPurple
             style={{
               fontFamily: "nunito-bold",
-              marginTop: 30,
-              marginLeft: -185,
-              fontSize: 14,
+              marginTop: normalize(30),
+              marginLeft: normalize(-185),
+              fontSize: normalize(14),
             }}
           >
             Esqueci minha senha
@@ -90,9 +91,9 @@ export default ResetPassword = ({ navigation }) => {
           <TextBlack
             style={{
               fontFamily: "nunito-regular",
-              fontSize: 13,
-              marginBottom: 25,
-              marginLeft: -60,
+              fontSize: normalize(13),
+              marginBottom: normalize(25),
+              marginLeft: normalize(-60),
             }}
           >
             Informe seu usuário abaixo para recuperá-la.
@@ -104,14 +105,13 @@ export default ResetPassword = ({ navigation }) => {
             <View>
               <Input
                 style={{
-                  height: 50,
-                  width: 265,
-                  marginBottom: 15,
-                  paddingHorizontal: 12,
-                  paddingVertical: 16,
-                  marginTop: 20,
-                  marginLeft: -15,
-                  fontSize: 15,
+                  height: normalize(50),
+                  width: normalize(325),
+                  marginBottom: normalize(15),
+                  paddingHorizontal: normalize(12),
+                  paddingVertical: normalize(13),
+                  marginTop: normalize(20),
+                  fontSize: normalize(15),
                 }}
                 name="username"
                 type="username"
@@ -122,7 +122,7 @@ export default ResetPassword = ({ navigation }) => {
             </View>
             <View>
               <Image
-                style={{ width: 37, height: 32 }}
+                style={{ width: normalize(37), height: normalize(32) }}
                 source={require("../../../assets/usericon.png")}
               />
             </View>
@@ -130,20 +130,25 @@ export default ResetPassword = ({ navigation }) => {
 
           <Esquecisenha>
             <Image
-              onPress={() => navigation.navigate("Home")}
-              style={{ width: 22, height: 20 }}
+              onPress={() => navigation.navigate("HomeScreen")}
+              style={{ width: normalize(22), height: normalize(20) }}
               source={require("../../../assets/seta.png")}
             />
             <EsquecisenhaText
-              onPress={() => navigation.navigate("Home")}
+              onPress={() => navigation.navigate("HomeScreen")}
               style={{ fontFamily: "nunito-bold" }}
             >
               Retornar ao Login
             </EsquecisenhaText>
           </Esquecisenha>
-
           <ViewLogin onPress={() => formRef.current.submitForm()} title="Logar">
-            <Text style={{ color: "#fff", fontFamily: "nunito-bold" }}>
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: normalize(15),
+                fontFamily: "nunito-bold",
+              }}
+            >
               Recuperar
             </Text>
           </ViewLogin>
@@ -152,3 +157,4 @@ export default ResetPassword = ({ navigation }) => {
     </ScrollView>
   );
 };
+export default ResetPassword;

@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import normalize from "../../utils/normalize";
 
 export const Container = styled.View`
   flex: 1;
@@ -8,20 +9,20 @@ export const Container = styled.View`
 `;
 
 export const ImageI = styled.Image`
-  height: 150px;
-  width: 150px;
-  margin-top: -10px;
-  margin-bottom: 10px;
+  height: ${normalize(150)}px;
+  width: ${normalize(150)}px;
+  margin-top: ${normalize(-10)}px;
+  margin-bottom: ${normalize(10)}px;
 `;
 
 export const Esquecisenha = styled.Text`
-  margin-left: 230px;
-  margin-top: -20px;
+  margin-left: ${normalize(230)}px;
+  margin-top: ${normalize(-20)}px;
 `;
 
 export const EsquecisenhaText = styled.Text`
   color: white;
-  font-size: 13px;
+  font-size: ${normalize(13)}px;
   color: black;
 `;
 
@@ -32,30 +33,30 @@ export const TextBlack = styled.Text`
 export const TextPurple = styled.Text`
   color: black;
   text-align: center;
-  font-size: 14px;
+  font-size: ${normalize(14)}px;
 `;
 
 export const View2 = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-radius: 5px;
+  border-radius: ${normalize(5)}px;
 
   background-color: #ffffff;
-  height: 56px;
+  height: ${normalize(56)}px;
   justify-content: space-between;
-  width: 327px;
-  margin-bottom: 25px;
+  width: ${normalize(327)}px;
+  margin-bottom: ${normalize(25)}px;
   justify-content: center;
-  border-radius: 10px;
-  border-width: 1px;
+  border-radius: ${normalize(10)}px;
+  border-width: ${normalize(1)}px;
   border-color: #d3e2e5;
 `;
 
 export const ViewLogin = styled.TouchableOpacity`
-  height: 56px;
-  width: 327px;
-  border-radius: 5px;
+  height: ${normalize(56)}px;
+  width: ${normalize(327)}px;
+  border-radius: ${normalize(5)}px;
   background-color: #6f2da8;
   margin-top: 293px;
   justify-content: center;
@@ -64,5 +65,5 @@ export const ViewLogin = styled.TouchableOpacity`
 
 export const TextLogin = styled.Text`
   color: white;
-  font-size: 18px;
+  font-size: ${normalize(18)}px;
 `;

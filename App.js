@@ -1,24 +1,14 @@
 import React from "react";
+import Routes from "./src/routes/index";
+import AppProvider from "./src/hooks";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 
-import HomeScreen from "./src/pages/HomeScreen";
-import ResetPassword from "./src/pages/ResetPassword";
-import FinishPassword from "./src/pages/FinishPassword";
+const App = () => (
+  <NavigationContainer>
+    <AppProvider>
+      <Routes />
+    </AppProvider>
+  </NavigationContainer>
+);
 
-const Stack = createStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Reset" component={ResetPassword} />
-        <Stack.Screen name="FinishReset" component={FinishPassword} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+export default App;

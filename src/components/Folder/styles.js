@@ -1,8 +1,9 @@
 import styled from "styled-components/native";
+import normalize from "../../utils/normalize";
 
 export const ImageI = styled.Image`
-  height: 150px;
-  width: 150px;
-  margin-top: -10px;
-  margin-bottom: 10px;
+  height: ${normalize(150)}px;
+  width: ${normalize(150)}px;
+  margin-top: ${normalize(-10)}px;
+  margin-bottom: ${normalize(10)}px;
 `;

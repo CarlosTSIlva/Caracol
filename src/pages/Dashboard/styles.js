@@ -15,16 +15,15 @@ export const ImageI = styled.Image`
   margin-bottom: ${normalize(10)}px;
 `;
 
-export const Esquecisenha = styled.View`
-  display: flex;
-  flex-direction: row;
+export const Esquecisenha = styled.Text`
+  margin-left: ${normalize(230)}px;
+  margin-top: ${normalize(-20)}px;
 `;
 
 export const EsquecisenhaText = styled.Text`
   color: white;
   font-size: ${normalize(13)}px;
   color: black;
-  margin-left: ${normalize(8)}px;
 `;
 
 export const TextBlack = styled.Text`
@@ -46,7 +45,7 @@ export const View2 = styled.View`
   background-color: #ffffff;
   height: ${normalize(56)}px;
   justify-content: space-between;
-  width: ${normalize(367)}px;
+  width: ${normalize(327)}px;
   margin-bottom: ${normalize(25)}px;
   justify-content: center;
   border-radius: ${normalize(10)}px;
@@ -59,8 +58,7 @@ export const ViewLogin = styled.TouchableOpacity`
   width: ${normalize(327)}px;
   border-radius: ${normalize(5)}px;
   background-color: #6f2da8;
-  margin-top: ${normalize(63)}%;
-  margin-left: ${normalize(24)}px;
+  margin-top: ${normalize(293)}px;
   justify-content: center;
   align-items: center;
 `;

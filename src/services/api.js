@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://caracolapi.herokuapp.com",
+  baseURL: " http://dev-caracol-api.herokuapp.com/usuario",
 });
 
 export default api;

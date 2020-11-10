@@ -11,17 +11,17 @@ import {
   TextPurple,
 } from "./styles";
 import Icon from "react-native-vector-icons/FontAwesome";
+import normalize from "../../utils/normalize";
 
 import { Form } from "@unform/mobile";
 import * as Yup from "yup";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
+import { useAuth } from "../../hooks/auth";
 import Folder from "../../components/Folder";
 import Input from "../../components/Input";
 import CheckBox from "../../components/checkBox";
-import api from "../../services/api";
-import { NavigationContainer } from "@react-navigation/native";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -30,7 +30,7 @@ const fetchFonts = () => {
   });
 };
 
-export default HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation }) => {
   const [dataLoader, setdataLoader] = useState(false);
   const [check, setCheck] = useState(false);
   const formRef = useRef(null);
@@ -39,8 +39,9 @@ export default HomeScreen = ({ navigation }) => {
 
   const icon = !visible ? "eye-slash" : "eye";
 
+  const { singIn } = useAuth();
+
   const handleSubmit = useCallback(async (data) => {
-    console.log(data);
     try {
       formRef.current?.setErrors({});
 
@@ -52,10 +53,11 @@ export default HomeScreen = ({ navigation }) => {
       await schema.validate(data, {
         abortEarly: false,
       });
-
-      await api.get("/authenticateUsuario", data);
-      const casa = await api.get("/authenticateUsuario", data);
-      console.log(casa);
+      await singIn({
+        application: "CRCL_APP",
+        username: data.username,
+        password: data.password,
+      });
     } catch (err) {
       if (err) {
         if (err instanceof Yup.ValidationError) {
@@ -84,16 +86,16 @@ export default HomeScreen = ({ navigation }) => {
   return (
     <ScrollView>
       <StatusBar backgroundColor="black" />
-      <Folder />
 
+      <Folder />
       <Container>
         <View>
           <TextPurple
             style={{
               fontFamily: "nunito-bold",
-              marginTop: 30,
-              marginLeft: -206,
-              fontSize: 14,
+              marginTop: normalize(30),
+              marginLeft: normalize(-206),
+              fontSize: normalize(14),
             }}
           >
             Seja bem-vindo(a)
@@ -102,9 +104,9 @@ export default HomeScreen = ({ navigation }) => {
           <TextBlack
             style={{
               fontFamily: "nunito-regular",
-              fontSize: 13,
-              marginBottom: 25,
-              marginLeft: -154,
+              fontSize: normalize(13),
+              marginBottom: normalize(25),
+              marginLeft: normalize(-154),
             }}
           >
             Faça seu login para continuar.
@@ -116,14 +118,14 @@ export default HomeScreen = ({ navigation }) => {
             <View>
               <Input
                 style={{
-                  height: 50,
-                  width: 265,
-                  marginBottom: 15,
-                  paddingHorizontal: 12,
-                  paddingVertical: 16,
-                  marginTop: 20,
-                  marginLeft: -15,
-                  fontSize: 15,
+                  height: normalize(50),
+                  width: normalize(265),
+                  marginBottom: normalize(15),
+                  paddingHorizontal: normalize(12),
+                  paddingVertical: normalize(16),
+                  marginTop: normalize(20),
+                  marginLeft: normalize(-15),
+                  fontSize: normalize(15),
                 }}
                 name="username"
                 type="username"
@@ -134,24 +136,24 @@ export default HomeScreen = ({ navigation }) => {
             </View>
             <View>
               <Image
-                style={{ width: 37, height: 32 }}
+                style={{ width: normalize(37), height: normalize(32) }}
                 source={require("../../../assets/usericon.png")}
               />
             </View>
           </View2>
 
-          <View2 style={{ marginBottom: 35 }}>
+          <View2 style={{ marginBottom: normalize(35) }}>
             <View>
               <Input
                 style={{
-                  height: 50,
-                  width: 265,
-                  marginBottom: 15,
-                  paddingHorizontal: 12,
-                  paddingVertical: 16,
-                  marginTop: 20,
-                  marginLeft: -15,
-                  fontSize: 15,
+                  height: normalize(50),
+                  width: normalize(265),
+                  marginBottom: normalize(15),
+                  paddingHorizontal: normalize(12),
+                  paddingVertical: normalize(16),
+                  marginTop: normalize(20),
+                  marginLeft: normalize(-15),
+                  fontSize: normalize(15),
                 }}
                 name="password"
                 type="password"
@@ -166,9 +168,9 @@ export default HomeScreen = ({ navigation }) => {
                 name={icon}
                 color={"#9e9e9e"}
                 onPress={() => setVisibility(!visible)}
-                size={30}
+                size={normalize(30)}
                 style={{
-                  padding: 3,
+                  padding: normalize(3),
                   textAlign: "center",
                   textAlignVertical: "center",
                 }}
@@ -176,7 +178,7 @@ export default HomeScreen = ({ navigation }) => {
             </View>
           </View2>
 
-          <Esquecisenha onPress={() => navigation.navigate("Reset")}>
+          <Esquecisenha onPress={() => navigation.navigate("ResetPassword")}>
             <EsquecisenhaText style={{ fontFamily: "nunito-bold" }}>
               Esqueci a senha
             </EsquecisenhaText>
@@ -184,14 +186,20 @@ export default HomeScreen = ({ navigation }) => {
 
           <CheckBox
             label="Mantenha-me conectado"
-            labelStyle={{ color: "#000000", fontSize: 15 }}
+            labelStyle={{ color: "#000000", fontSize: normalize(15) }}
             iconColor="#000000"
             checkColor="#000000"
             value={check}
             onChange={handleCheck}
           />
           <ViewLogin onPress={() => formRef.current.submitForm()} title="Logar">
-            <Text style={{ color: "#fff", fontFamily: "nunito-bold" }}>
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: normalize(15),
+                fontFamily: "nunito-bold",
+              }}
+            >
               Entrar
             </Text>
           </ViewLogin>
@@ -200,3 +208,4 @@ export default HomeScreen = ({ navigation }) => {
     </ScrollView>
   );
 };
+export default HomeScreen;

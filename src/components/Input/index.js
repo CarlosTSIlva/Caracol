@@ -1,7 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
-import { Text, TextInput, StyleSheet } from "react-native";
+import React, { useRef, useEffect } from "react";
+import { TextInput, StyleSheet } from "react-native";
 import { useField } from "@unform/core";
-
+import normalize from "../../utils/normalize";
 function Input({ name, ...rest }) {
   const inputRef = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
@@ -46,14 +46,14 @@ function Input({ name, ...rest }) {
 
 const styles = StyleSheet.create({
   input: {
-    height: 560,
-    width: 327,
-    marginBottom: 15,
-    paddingHorizontal: 12,
-    paddingVertical: 16,
-    borderRadius: 4,
-    borderWidth: 2,
-    fontSize: 15,
+    height: normalize(560),
+    width: normalize(327),
+    marginBottom: normalize(15),
+    paddingHorizontal: normalize(12),
+    paddingVertical: normalize(16),
+    borderRadius: normalize(4),
+    borderWidth: normalize(2),
+    fontSize: normalize(15),
   },
 });
 

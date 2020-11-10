@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
-
+import normalize from "../../utils/normalize";
 export default function CheckBox(props) {
   function handleChange() {
     const { onChange } = props;
@@ -24,7 +24,7 @@ export default function CheckBox(props) {
           <Icon
             name="check"
             style={{
-              fontSize: 13,
+              fontSize: normalize(13),
               color: props.iconColor ? props.iconColor : "#000000",
             }}
           />
@@ -38,21 +38,21 @@ export default function CheckBox(props) {
 
 const styles = StyleSheet.create({
   CheckBox: {
-    width: 16,
-    height: 16,
-    borderWidth: 1,
+    width: normalize(16),
+    height: normalize(16),
+    borderWidth: normalize(1),
     justifyContent: "center",
     alignItems: "center",
   },
   WrapperCheckBox: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
-    marginTop: 5,
+    marginBottom: normalize(20),
+    marginTop: normalize(5),
   },
   LabelCheck: {
     color: "#000000",
-    marginLeft: 6,
+    marginLeft: normalize(6),
   },
 });
 

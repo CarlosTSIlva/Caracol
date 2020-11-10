@@ -1,36 +1,35 @@
+import { Text, ImageBackground } from "react-native";
 import React from "react";
-
+import normalize from "../../utils/normalize";
 import { ImageI } from "./styles";
 
-import { Text, ImageBackground } from "react-native";
-
-export default Folder = () => {
+const Folder = () => {
   return (
     <ImageBackground
       style={{
         flex: 1,
-        maxWidth: 405,
-        maxHeight: 200,
-        marginBottom: -5,
+        maxWidth: normalize(415),
+        maxHeight: normalize(200),
+        marginBottom: normalize(-5),
       }}
       source={require("../../../assets/background.png")}
     >
       <ImageI
         source={require("../../../assets/logo.png")}
         style={{
-          marginLeft: 268,
-          maxWidth: 81,
-          maxHeight: 74,
-          marginBottom: 0,
-          marginTop: 70,
+          marginLeft: normalize(268),
+          maxWidth: normalize(81),
+          maxHeight: normalize(74),
+          marginBottom: normalize(0),
+          marginTop: normalize(70),
         }}
       />
       <Text
         style={{
           color: "#fff",
-          marginLeft: 248,
+          marginLeft: normalize(248),
           fontFamily: "nunito-bold",
-          fontSize: 18,
+          fontSize: normalize(18),
         }}
       >
         Caracol App
@@ -38,10 +37,10 @@ export default Folder = () => {
       <Text
         style={{
           color: "#fff",
-          marginLeft: 170,
+          marginLeft: normalize(170),
           fontFamily: "nunito-regular",
-          fontSize: 14,
-          width: 1200,
+          fontSize: normalize(14),
+          width: normalize(1200),
         }}
       >
         A sua casa onde você estiver.
@@ -49,3 +48,4 @@ export default Folder = () => {
     </ImageBackground>
   );
 };
+export default Folder;

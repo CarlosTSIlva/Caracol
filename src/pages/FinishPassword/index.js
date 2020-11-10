@@ -2,12 +2,11 @@ import React, { useState, useRef } from "react";
 
 import { StatusBar, View, Text, ScrollView } from "react-native";
 import { Container, TextBlack, ViewLogin, TextPurple } from "./styles";
+import normalize from "../../utils/normalize";
 
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
-
 import Folder from "../../components/Folder";
-
 const fetchFonts = () => {
   return Font.loadAsync({
     "nunito-regular": require("../fonts/Nunito-Regular.ttf"),
@@ -15,7 +14,7 @@ const fetchFonts = () => {
   });
 };
 
-export default FinishPassword = ({ navigation }) => {
+const FinishPassword = ({ navigation }) => {
   const [dataLoader, setdataLoader] = useState(false);
   const [check, setCheck] = useState(false);
   const formRef = useRef(null);
@@ -43,8 +42,8 @@ export default FinishPassword = ({ navigation }) => {
           <TextPurple
             style={{
               fontFamily: "nunito-bold",
-              marginTop: 30,
-              fontSize: 24,
+              marginTop: normalize(30),
+              fontSize: normalize(24),
             }}
           >
             Pronto :)
@@ -53,17 +52,23 @@ export default FinishPassword = ({ navigation }) => {
           <TextBlack
             style={{
               fontFamily: "nunito-regular",
-              fontSize: 16,
-              maxWidth: 272,
-              marginBottom: 25,
+              fontSize: normalize(16),
+              maxWidth: normalize(272),
+              marginBottom: normalize(25),
             }}
           >
             Um e-mail com instruções de como redefinir sua senha foi enviado.
           </TextBlack>
         </View>
 
-        <ViewLogin onPress={() => navigation.navigate("Home")} title="Logar">
-          <Text style={{ color: "#fff", fontFamily: "nunito-bold" }}>
+        <ViewLogin onPress={() => navigation.navigate("HomeScreen")}>
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: normalize(15),
+              fontFamily: "nunito-bold",
+            }}
+          >
             Voltar
           </Text>
         </ViewLogin>
@@ -71,3 +76,5 @@ export default FinishPassword = ({ navigation }) => {
     </ScrollView>
   );
 };
+
+export default FinishPassword;
