@@ -21,7 +21,10 @@ const AuthProvider = ({ children }) => {
         "@Caracol:status",
       ]);
       if (token[1] && status[1]) {
-        setData({ token: token[1], status: JSON.parse(status[1]) });
+        setData({
+          token: token[1],
+          status: JSON.parse(status[1]),
+        });
       }
       setLoading(false);
     }
@@ -41,7 +44,7 @@ const AuthProvider = ({ children }) => {
       ["@Caracol:status", JSON.stringify(status)],
     ]);
 
-    setData({ token, status });
+    setData({ token, status, username });
   }, []);
 
   const signOut = useCallback(async () => {
@@ -53,7 +56,8 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        status: data.status,
+        token: data.token,
+        username: data.username,
         singIn,
         signOut,
         loading,

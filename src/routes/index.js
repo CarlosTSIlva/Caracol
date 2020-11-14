@@ -7,8 +7,7 @@ import AppRoutes from "./app.routes";
 import { useAuth } from "../hooks/auth";
 
 const Routes = () => {
-  const { status, loading } = useAuth();
-
+  const { token, loading } = useAuth();
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -17,6 +16,6 @@ const Routes = () => {
     );
   }
 
-  return status ? <AppRoutes /> : <AuthRoutes />;
+  return token ? <AppRoutes /> : <AuthRoutes />;
 };
 export default Routes;
