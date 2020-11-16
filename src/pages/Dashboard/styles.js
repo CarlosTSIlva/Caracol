@@ -12,7 +12,7 @@ export const Settings = styled.View`
   flex-direction: row;
   margin: 12px 10px;
   border-radius: 5px;
-  margin-bottom: 238px;
+  margin-bottom: 218px;
 `;
 
 export const ViewName = styled.View`
@@ -35,9 +35,28 @@ export const Dados = styled.View`
 `;
 
 export const Navegaçao = styled.View`
-  background-color: #f2f2f2;
   flex-direction: row;
   margin: 12px 10px;
   border-radius: 5px;
-  margin-bottom: 238px;
+  margin-top: 8px;
+`;
+
+export const Menu = styled.View`
+  background-color: #6f2da8;
+  width: 72px;
+  height: 62px;
+
+  margin-right: 6px;
+  padding: 5px;
+  border-radius: 5px;
+`;
+
+export const Config = styled.TouchableOpacity`
+  background-color: #ffffff;
+  height: 34px;
+  width: 34px;
+  border-radius: 50px;
+  margin-left: 100px;
+  margin-right: 10px;
+  padding: 3px;
 `;
