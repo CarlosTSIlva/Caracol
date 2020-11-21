@@ -1,13 +1,14 @@
 import styled from "styled-components/native";
+import normalize from "../../utils/normalize";
 
 export const Container = styled.View`
   flex: 1;
   background-color: #ffffff;
 `;
 
-export const Header = styled.View`
-  width: 100%;
-  height: 108px;
+export const Header = styled.TouchableOpacity`
+  width: ${normalize(113)}%;
+  height: ${normalize(108)}px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,26 +17,26 @@ export const Header = styled.View`
 
 export const View2 = styled.View`
   display: flex;
-  padding: 5px;
+  padding: ${normalize(5)}px;
   flex-direction: row;
   align-items: center;
-  border-radius: 5px;
-  margin-left: 18px;
-  height: 56px;
+  border-radius: ${normalize(5)}px;
+  margin-left: ${normalize(40)}px;
+  height: ${normalize(56)}px;
   justify-content: space-between;
-  width: 90%;
-  border-radius: 10px;
-  border-width: 1px;
+  width: ${normalize(90)}%;
+  border-radius: ${normalize(10)}px;
+  border-width: ${normalize(1)}px;
   border-color: #d3e2e5;
 `;
 
 export const ViewLogin = styled.TouchableOpacity`
-  height: 56px;
-  margin-left: 5%;
-  width: 327px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  margin-top: 25px;
+  height: ${normalize(56)}px;
+  margin-left: ${normalize(10)}%;
+  width: ${normalize(327)}px;
+  margin-bottom: ${normalize(20)}px;
+  border-radius: ${normalize(5)}px;
+  margin-top: ${normalize(25)}px;
   background-color: #6f2da8;
   justify-content: center;
   align-items: center;

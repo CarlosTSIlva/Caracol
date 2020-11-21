@@ -16,12 +16,15 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     async function loadStorageData() {
-      const [token, status] = await AsyncStorage.multiGet([
+      const [token, status, username] = await AsyncStorage.multiGet([
         "@Caracol:token",
         "@Caracol:status",
+        "@Caracol:name",
       ]);
+
       if (token[1] && status[1]) {
         setData({
+          username: username[1],
           token: token[1],
           status: JSON.parse(status[1]),
         });
@@ -37,10 +40,14 @@ const AuthProvider = ({ children }) => {
       password,
       username,
     });
+
     const { token, status } = response.data;
+
+    api.defaults.headers.Authorization = `Bearer ${token}`;
 
     await AsyncStorage.multiSet([
       ["@Caracol:token", token],
+      ["@Caracol:name", username],
       ["@Caracol:status", JSON.stringify(status)],
     ]);
 
@@ -48,7 +55,11 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const signOut = useCallback(async () => {
-    await AsyncStorage.multiRemove(["@Caracol:token", "@Caracol:status"]);
+    await AsyncStorage.multiRemove([
+      "@Caracol:token",
+      "@Caracol:status",
+      "@Caracol:name",
+    ]);
 
     setData({});
   }, []);

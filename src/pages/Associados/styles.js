@@ -1,32 +1,34 @@
 import styled from "styled-components/native";
 
+import normalize from "../../utils/normalize";
+
 export const Container = styled.View`
   flex: 1;
 `;
 
-export const Header = styled.View`
-  width: 100%;
-  height: 108px;
+export const Header = styled.TouchableOpacity`
+  height: ${normalize(108)}px;
   display: flex;
   flex-direction: row;
   align-items: center;
   background-color: #f2f2f2;
 `;
 
-export const Menu = styled.View`
-  width: 100%;
-  margin-top: 15px;
+export const Menu = styled.TouchableOpacity`
+  margin-top: ${normalize(15)}px;
   flex-direction: row;
-  padding: 5px;
-  border-radius: 5px;
+  padding: ${normalize(5)}px;
+  border-radius: ${normalize(5)}px;
+  border: ${normalize(1)}px;
+  border-color: #ffff;
 `;
 
 export const ViewLogin = styled.TouchableOpacity`
-  height: 56px;
-  margin-left: 5%;
-  width: 327px;
-  margin-bottom: 20px;
-  border-radius: 5px;
+  height: ${normalize(56)}px;
+  margin-left: ${normalize(12)}%;
+  width: ${normalize(327)}px;
+  margin-bottom: ${normalize(20)}px;
+  border-radius: ${normalize(5)}px;
   background-color: #6f2da8;
   justify-content: center;
   align-items: center;

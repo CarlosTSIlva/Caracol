@@ -1,37 +1,84 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Text, Image, View, ScrollView } from "react-native";
 import { Form } from "@unform/mobile";
 import Input from "../../components/Input";
 import { Picker } from "@react-native-picker/picker";
 import { Container, Header, View2, ViewLogin } from "./styles";
+import normalize from "../../utils/normalize";
 
-const ContaEdit = () => {
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
+const fetchFonts = () => {
+  return Font.loadAsync({
+    "nunito-regular": require("../fonts/Nunito-Regular.ttf"),
+    "nunito-bold": require("../fonts/Nunito-Bold.ttf"),
+  });
+};
+
+import { useTheme } from "../../components/Theme/ThemeProvider";
+
+const ContaEdit = ({ navigation }) => {
   const formRef = useRef(null);
+  const { colors } = useTheme();
+
+  const [dataLoader, setdataLoader] = useState(false);
+
+  if (!dataLoader) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setdataLoader(true)}
+      />
+    );
+  }
 
   return (
-    <Container>
+    <Container style={{ backgroundColor: colors.background }}>
       <ScrollView>
-        <Header>
+        <Header
+          style={{ backgroundColor: colors.backgroundHeader }}
+          onPress={() => navigation.goBack()}
+        >
           <Image
-            style={{ width: 31, height: 36, marginRight: 98 }}
+            style={{
+              width: normalize(31),
+              height: normalize(36),
+              marginRight: normalize(130),
+            }}
             source={require("../../../assets/back.png")}
           />
-          <Text style={{ fontSize: 18, color: "#6F2DA8" }}>Editar Conta</Text>
+          <Text
+            style={{
+              fontSize: normalize(18),
+              color: "#6F2DA8",
+              fontFamily: "nunito-regular",
+            }}
+          >
+            Editar Conta
+          </Text>
         </Header>
         <Form ref={formRef}>
-          <View style={{ marginTop: 25 }}>
-            <Text style={{ marginLeft: 20 }}>Nome</Text>
+          <View style={{ marginTop: normalize(25) }}>
+            <Text
+              style={{
+                marginLeft: normalize(42),
+                color: colors.text,
+                fontFamily: "nunito-regular",
+              }}
+            >
+              Nome
+            </Text>
             <View2>
               <View>
                 <Input
                   style={{
-                    height: 50,
-                    width: 340,
-                    marginBottom: 15,
-                    paddingHorizontal: 12,
-                    marginTop: 20,
-                    marginLeft: -15,
-                    fontSize: 15,
+                    height: normalize(50),
+                    width: normalize(340),
+                    marginBottom: normalize(15),
+                    paddingHorizontal: normalize(12),
+                    marginTop: normalize(20),
+                    marginLeft: normalize(-10),
+                    fontSize: normalize(15),
                   }}
                   name="username"
                   type="username"
@@ -43,19 +90,27 @@ const ContaEdit = () => {
             </View2>
           </View>
 
-          <View style={{ marginTop: 25 }}>
-            <Text style={{ marginLeft: 20 }}>E-mail</Text>
+          <View style={{ marginTop: normalize(25) }}>
+            <Text
+              style={{
+                marginLeft: normalize(42),
+                color: colors.text,
+                fontFamily: "nunito-regular",
+              }}
+            >
+              E-mail
+            </Text>
             <View2>
               <View>
                 <Input
                   style={{
-                    height: 50,
-                    width: 340,
-                    marginBottom: 15,
-                    paddingHorizontal: 12,
-                    marginTop: 20,
-                    marginLeft: -15,
-                    fontSize: 15,
+                    height: normalize(50),
+                    width: normalize(340),
+                    marginBottom: normalize(15),
+                    paddingHorizontal: normalize(12),
+                    marginTop: normalize(20),
+                    marginLeft: normalize(-10),
+                    fontSize: normalize(15),
                   }}
                   name="username"
                   type="username"
@@ -67,19 +122,27 @@ const ContaEdit = () => {
             </View2>
           </View>
 
-          <View style={{ marginTop: 25 }}>
-            <Text style={{ marginLeft: 20 }}>Celular</Text>
+          <View style={{ marginTop: normalize(25) }}>
+            <Text
+              style={{
+                marginLeft: normalize(42),
+                color: colors.text,
+                fontFamily: "nunito-regular",
+              }}
+            >
+              Celular
+            </Text>
             <View2>
               <View>
                 <Input
                   style={{
-                    height: 50,
-                    width: 340,
-                    marginBottom: 15,
-                    paddingHorizontal: 12,
-                    marginTop: 20,
-                    marginLeft: -15,
-                    fontSize: 15,
+                    height: normalize(50),
+                    width: normalize(340),
+                    marginBottom: normalize(15),
+                    paddingHorizontal: normalize(12),
+                    marginTop: normalize(20),
+                    marginLeft: normalize(-10),
+                    fontSize: normalize(15),
                   }}
                   name="username"
                   type="username"
@@ -91,19 +154,27 @@ const ContaEdit = () => {
             </View2>
           </View>
 
-          <View style={{ marginTop: 25 }}>
-            <Text style={{ marginLeft: 20 }}>Documento de identificação</Text>
+          <View style={{ marginTop: normalize(25) }}>
+            <Text
+              style={{
+                marginLeft: normalize(42),
+                color: colors.text,
+                fontFamily: "nunito-regular",
+              }}
+            >
+              Documento de identificação
+            </Text>
             <View2>
               <View>
                 <Input
                   style={{
-                    height: 50,
-                    width: 340,
-                    marginBottom: 15,
-                    paddingHorizontal: 12,
-                    marginTop: 20,
-                    marginLeft: -15,
-                    fontSize: 15,
+                    height: normalize(50),
+                    width: normalize(340),
+                    marginBottom: normalize(15),
+                    paddingHorizontal: normalize(12),
+                    marginTop: normalize(20),
+                    marginLeft: normalize(-10),
+                    fontSize: normalize(15),
                   }}
                   name="username"
                   type="username"
@@ -115,20 +186,46 @@ const ContaEdit = () => {
             </View2>
           </View>
 
-          <View style={{ marginTop: 25 }}>
-            <Text style={{ marginLeft: 20 }}>Gênero</Text>
+          <View style={{ marginTop: normalize(25) }}>
+            <Text
+              style={{
+                marginLeft: normalize(42),
+                color: colors.text,
+                fontFamily: "nunito-regular",
+              }}
+            >
+              Gênero
+            </Text>
             <View2>
-              <Picker mode="dropdown" style={{ height: 50, width: 320 }}>
+              <Picker
+                mode="dropdown"
+                style={{ height: normalize(50), width: normalize(320) }}
+              >
                 <Picker.Item label="Masculino" value="Masculino" />
                 <Picker.Item label="Feminino" value="Feminino" />
               </Picker>
             </View2>
           </View>
 
-          <View style={{ marginTop: 25 }}>
-            <Text style={{ marginLeft: 20 }}>Perfil</Text>
+          <View style={{ marginTop: normalize(25) }}>
+            <Text
+              style={{
+                marginLeft: normalize(42),
+                color: colors.text,
+                fontFamily: "nunito-regular",
+              }}
+            >
+              Perfil
+            </Text>
             <View2>
-              <Picker mode="dropdown" style={{ height: 50, width: 320 }}>
+              <Picker
+                mode="dropdown"
+                style={{
+                  height: normalize(50),
+                  width: normalize(320),
+                  fontFamily: "nunito-regular",
+                }}
+              >
                 <Picker.Item
                   label="Morador com Permissão"
                   value="Morador com Permissão"
@@ -141,19 +238,27 @@ const ContaEdit = () => {
             </View2>
           </View>
 
-          <View style={{ marginTop: 25 }}>
-            <Text style={{ marginLeft: 20 }}>Usuário</Text>
+          <View style={{ marginTop: normalize(25) }}>
+            <Text
+              style={{
+                marginLeft: normalize(42),
+                color: colors.text,
+                fontFamily: "nunito-regular",
+              }}
+            >
+              Usuário
+            </Text>
             <View2>
               <View>
                 <Input
                   style={{
-                    height: 50,
-                    width: 340,
-                    marginBottom: 15,
-                    paddingHorizontal: 12,
-                    marginTop: 20,
-                    marginLeft: -15,
-                    fontSize: 15,
+                    height: normalize(50),
+                    width: normalize(340),
+                    marginBottom: normalize(15),
+                    paddingHorizontal: normalize(12),
+                    marginTop: normalize(20),
+                    marginLeft: normalize(-10),
+                    fontSize: normalize(15),
                   }}
                   name="username"
                   type="username"
@@ -165,19 +270,27 @@ const ContaEdit = () => {
             </View2>
           </View>
 
-          <View style={{ marginTop: 25 }}>
-            <Text style={{ marginLeft: 20 }}>Senha</Text>
+          <View style={{ marginTop: normalize(25) }}>
+            <Text
+              style={{
+                marginLeft: normalize(42),
+                color: colors.text,
+                fontFamily: "nunito-regular",
+              }}
+            >
+              Senha
+            </Text>
             <View2>
               <View>
                 <Input
                   style={{
-                    height: 50,
-                    width: 340,
-                    marginBottom: 15,
-                    paddingHorizontal: 12,
-                    marginTop: 20,
-                    marginLeft: -15,
-                    fontSize: 15,
+                    height: normalize(50),
+                    width: normalize(340),
+                    marginBottom: normalize(15),
+                    paddingHorizontal: normalize(12),
+                    marginTop: normalize(20),
+                    marginLeft: normalize(-10),
+                    fontSize: normalize(15),
                   }}
                   name="username"
                   type="username"
@@ -189,19 +302,27 @@ const ContaEdit = () => {
             </View2>
           </View>
 
-          <View style={{ marginTop: 25 }}>
-            <Text style={{ marginLeft: 20 }}>Confirmação de Senha</Text>
+          <View style={{ marginTop: normalize(25) }}>
+            <Text
+              style={{
+                marginLeft: normalize(42),
+                color: colors.text,
+                fontFamily: "nunito-regular",
+              }}
+            >
+              Confirmação de Senha
+            </Text>
             <View2>
               <View>
                 <Input
                   style={{
-                    height: 50,
-                    width: 340,
-                    marginBottom: 15,
-                    paddingHorizontal: 12,
-                    marginTop: 20,
-                    marginLeft: -15,
-                    fontSize: 15,
+                    height: normalize(50),
+                    width: normalize(340),
+                    marginBottom: normalize(15),
+                    paddingHorizontal: normalize(12),
+                    marginTop: normalize(20),
+                    marginLeft: normalize(-10),
+                    fontSize: normalize(15),
                   }}
                   name="username"
                   type="username"
@@ -217,7 +338,8 @@ const ContaEdit = () => {
             <Text
               style={{
                 color: "#fff",
-                fontSize: 15,
+                fontFamily: "nunito-regular",
+                fontSize: normalize(15),
               }}
             >
               Salvar
