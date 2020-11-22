@@ -21,7 +21,6 @@ const AuthProvider = ({ children }) => {
         "@Caracol:status",
         "@Caracol:name",
       ]);
-
       if (token[1] && status[1]) {
         setData({
           username: username[1],
@@ -42,8 +41,7 @@ const AuthProvider = ({ children }) => {
     });
 
     const { token, status } = response.data;
-
-    api.defaults.headers.Authorization = `Bearer ${token}`;
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     await AsyncStorage.multiSet([
       ["@Caracol:token", token],
@@ -63,7 +61,6 @@ const AuthProvider = ({ children }) => {
 
     setData({});
   }, []);
-
   return (
     <AuthContext.Provider
       value={{

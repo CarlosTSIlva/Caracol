@@ -13,7 +13,7 @@ export const Settings = styled.View`
   width: ${normalize(394)}px;
   margin: ${normalize(12)}px ${normalize(10)}px;
   border-radius: ${normalize(5)}px;
-  margin-bottom: ${normalize(288)}px;
+  margin-bottom: ${normalize(58)}%;
 `;
 
 export const ViewName = styled.View`

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Image, Text, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Image, Text, ScrollView, Button, FlatList } from "react-native";
 import {
   Settings,
   ViewName,
@@ -13,7 +13,9 @@ import {
 import normalize from "../../utils/normalize";
 import { useTheme } from "../../components/Theme/ThemeProvider";
 import { AppLoading } from "expo";
-
+import AsyncStorage from "@react-native-community/async-storage";
+import api from "../../services/api";
+import { useAuth } from "../../hooks/auth";
 import * as Font from "expo-font";
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -25,6 +27,21 @@ const fetchFonts = () => {
 const Dashboard = ({ navigation }) => {
   const { colors } = useTheme();
   const [dataLoader, setdataLoader] = useState(false);
+  const [dados, setDados] = useState([]);
+  const { signOut } = useAuth();
+  useEffect(() => {
+    async function Dados() {
+      const [username, status] = await AsyncStorage.multiGet([
+        "@Caracol:name",
+        "@Caracol:status",
+      ]);
+      api.get(`/info/${username[1]}`).then((res) => {
+        setDados(res.data);
+      });
+    }
+
+    Dados();
+  }, []);
 
   if (!dataLoader) {
     return (
@@ -39,6 +56,7 @@ const Dashboard = ({ navigation }) => {
     <View style={{ backgroundColor: colors.background }}>
       <ScrollView style={{ backgroundColor: colors.background }}>
         <Container style={{ backgroundColor: colors.background }}>
+          <FlatList data={dados} keyExtractor></FlatList>
           <Settings
             style={{
               backgroundColor: colors.backgroundHeader,
@@ -52,6 +70,7 @@ const Dashboard = ({ navigation }) => {
               source={require("../../../assets/Perfil.png")}
             />
             <View>
+              <Button title="sair" onPress={signOut} />
               <ViewName>
                 <Text
                   style={{
@@ -60,7 +79,7 @@ const Dashboard = ({ navigation }) => {
                     fontFamily: "nunito-regular",
                   }}
                 >
-                  Olá, Carlos
+                  Olá,{}
                 </Text>
                 <Config onPress={() => navigation.navigate("Config")}>
                   <Image
