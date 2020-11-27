@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, Image, Text, ScrollView, Button, FlatList } from "react-native";
 import {
   Settings,
@@ -10,10 +10,11 @@ import {
   Menu,
   Config,
 } from "./styles";
+import moment from "moment";
 import normalize from "../../utils/normalize";
 import { useTheme } from "../../components/Theme/ThemeProvider";
 import { AppLoading } from "expo";
-import AsyncStorage from "@react-native-community/async-storage";
+
 import api from "../../services/api";
 import { useAuth } from "../../hooks/auth";
 import * as Font from "expo-font";
@@ -25,38 +26,41 @@ const fetchFonts = () => {
 };
 
 const Dashboard = ({ navigation }) => {
+  const [loading, setLoading] = useState(false);
   const { colors } = useTheme();
-  const [dataLoader, setdataLoader] = useState(false);
-  const [dados, setDados] = useState([]);
-  const { signOut } = useAuth();
-  useEffect(() => {
-    async function Dados() {
-      const [username, status] = await AsyncStorage.multiGet([
-        "@Caracol:name",
-        "@Caracol:status",
-      ]);
-      api.get(`/info/${username[1]}`).then((res) => {
-        setDados(res.data);
-      });
-    }
+  const { signOut, dados } = useAuth();
+  const [encomendas, setEncomendas] = useState([]);
+  const [reservas, setReservas] = useState([]);
 
-    Dados();
-  }, []);
+  useEffect(
+    (async) => () => {
+      api
+        .get(`/unidade/${dados.data?.contas[0]?.unidade.id}/encomenda`)
+        .then((res) => {
+          setEncomendas(res.data);
+        });
+      api
+        .get(`/unidade/${dados.data?.contas[0]?.unidade.id}/schedule`)
+        .then((res) => {
+          setReservas(res.data);
+        });
+      if (!loading) {
+        return (
+          <AppLoading
+            startAsync={fetchFonts}
+            onFinish={() => setLoading(true)}
+          />
+        );
+      }
+    },
 
-  if (!dataLoader) {
-    return (
-      <AppLoading
-        startAsync={fetchFonts}
-        onFinish={() => setdataLoader(true)}
-      />
-    );
-  }
+    []
+  );
 
   return (
     <View style={{ backgroundColor: colors.background }}>
       <ScrollView style={{ backgroundColor: colors.background }}>
         <Container style={{ backgroundColor: colors.background }}>
-          <FlatList data={dados} keyExtractor></FlatList>
           <Settings
             style={{
               backgroundColor: colors.backgroundHeader,
@@ -76,10 +80,11 @@ const Dashboard = ({ navigation }) => {
                   style={{
                     fontSize: normalize(18),
                     color: "#6f2da8",
+                    maxWidth: 103,
                     fontFamily: "nunito-regular",
                   }}
                 >
-                  Olá,{}
+                  Olá, {dados.data?.info.nome}
                 </Text>
                 <Config onPress={() => navigation.navigate("Config")}>
                   <Image
@@ -102,121 +107,95 @@ const Dashboard = ({ navigation }) => {
               </View>
             </View>
           </Settings>
+        </Container>
+        <View>
           <Quadro>
             <Text style={{ color: colors.text, fontFamily: "nunito-regular" }}>
               Encomendas
             </Text>
-            <Dados>
-              <Image
-                style={{
-                  width: normalize(40),
-                  height: normalize(40),
-                  marginRight: normalize(14),
-                }}
-                source={require("../../../assets/Encomenda.png")}
+
+            <ScrollView style={{ height: 150 }}>
+              <FlatList
+                data={encomendas.data?.encomendas}
+                keyExtractor={(encomendas) => encomendas.id}
+                renderItem={({ item: encomendas }) => (
+                  <Dados>
+                    <Image
+                      style={{
+                        width: normalize(40),
+                        height: normalize(40),
+                        marginRight: normalize(14),
+                      }}
+                      source={{ uri: encomendas.imagem }}
+                    />
+                    <View>
+                      <Text
+                        style={{
+                          color: colors.text,
+                          fontFamily: "nunito-regular",
+                        }}
+                      >
+                        {encomendas.tipo.descricao}
+                      </Text>
+                      <Text
+                        style={{
+                          marginLeft: normalize(2),
+                          color: colors.text,
+                          fontFamily: "nunito-regular",
+                        }}
+                      >
+                        {encomendas.status.descricao}
+                      </Text>
+                    </View>
+                  </Dados>
+                )}
               />
-              <View>
-                <Text
-                  style={{ color: colors.text, fontFamily: "nunito-regular" }}
-                >
-                  Encomenda Frágil
-                </Text>
-                <Text
-                  style={{
-                    marginLeft: normalize(2),
-                    color: colors.text,
-                    fontFamily: "nunito-regular",
-                  }}
-                >
-                  01/01/2020
-                </Text>
-              </View>
-            </Dados>
-            <Dados>
-              <Image
-                style={{
-                  width: normalize(40),
-                  height: normalize(40),
-                  marginRight: normalize(14),
-                }}
-                source={require("../../../assets/Encomenda.png")}
-              />
-              <View>
-                <Text
-                  style={{ color: colors.text, fontFamily: "nunito-regular" }}
-                >
-                  Encomenda Correio
-                </Text>
-                <Text
-                  style={{
-                    marginLeft: normalize(2),
-                    color: colors.text,
-                    fontFamily: "nunito-regular",
-                  }}
-                >
-                  01/01/2020
-                </Text>
-              </View>
-            </Dados>
+            </ScrollView>
           </Quadro>
-          <Quadro>
-            <Text style={{ color: colors.text, fontFamily: "nunito-regular" }}>
-              Próximas Reservas
-            </Text>
-            <Dados>
-              <Image
-                style={{
-                  width: normalize(40),
-                  height: normalize(40),
-                  marginRight: normalize(14),
-                }}
-                source={require("../../../assets/Encomenda.png")}
-              />
-              <View>
-                <Text
-                  style={{ color: colors.text, fontFamily: "nunito-regular" }}
-                >
-                  Quadra de Tênis
-                </Text>
-                <Text
-                  style={{
-                    marginLeft: normalize(2),
-                    color: colors.text,
-                    fontFamily: "nunito-regular",
-                  }}
-                >
-                  01/01/2020
-                </Text>
-              </View>
-            </Dados>
-            <Dados>
-              <Image
-                style={{
-                  width: normalize(40),
-                  height: normalize(40),
-                  marginRight: normalize(14),
-                }}
-                source={require("../../../assets/Encomenda.png")}
-              />
-              <View>
-                <Text
-                  style={{ color: colors.text, fontFamily: "nunito-regular" }}
-                >
-                  Churrasqueira
-                </Text>
-                <Text
-                  style={{
-                    marginLeft: normalize(2),
-                    color: colors.text,
-                    fontFamily: "nunito-regular",
-                  }}
-                >
-                  01/01/2020
-                </Text>
-              </View>
-            </Dados>
-          </Quadro>
-        </Container>
+        </View>
+
+        <Quadro>
+          <Text style={{ color: colors.text, fontFamily: "nunito-regular" }}>
+            Proxima Reservas
+          </Text>
+          <ScrollView style={{ height: 150 }}>
+            <FlatList
+              data={reservas?.data}
+              keyExtractor={(reservas) => reservas.id}
+              renderItem={({ item: reservas }) => (
+                <Dados>
+                  <Image
+                    style={{
+                      width: normalize(40),
+                      height: normalize(40),
+                      marginRight: normalize(14),
+                    }}
+                    source={{ uri: reservas.areacomum.imagem }}
+                  />
+                  <View>
+                    <Text
+                      style={{
+                        color: colors.text,
+                        fontFamily: "nunito-regular",
+                      }}
+                    >
+                      {reservas.areacomum.nome}
+                    </Text>
+                    <Text
+                      style={{
+                        marginLeft: normalize(2),
+                        color: colors.text,
+                        fontFamily: "nunito-regular",
+                      }}
+                    >
+                      {moment().add(10, "days").calendar(`${reservas.inicio}`)}{" "}
+                    </Text>
+                  </View>
+                </Dados>
+              )}
+            />
+          </ScrollView>
+        </Quadro>
       </ScrollView>
       <Navegaçao style={{ backgroundColor: colors.background }}>
         <Menu>

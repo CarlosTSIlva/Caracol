@@ -19,7 +19,6 @@ export const Settings = styled.View`
 export const ViewName = styled.View`
   flex-direction: row;
   margin-left: ${normalize(5)}px;
-  margin-top: ${normalize(15)}px;
 `;
 
 export const Quadro = styled.View`
@@ -57,7 +56,7 @@ export const Config = styled.TouchableOpacity`
   height: ${normalize(34)}px;
   width: ${normalize(34)}px;
   border-radius: ${normalize(50)}px;
-  margin-left: ${normalize(163)}px;
+  margin-left: ${normalize(103)}px;
   margin-right: ${normalize(10)}px;
   padding: ${normalize(3)}px;
 `;

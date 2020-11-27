@@ -30,7 +30,6 @@ const fetchFonts = () => {
 const ResetPassword = ({ navigation }) => {
   const [dataLoader, setdataLoader] = useState(false);
   const [check, setCheck] = useState(false);
-  const formRef = useRef(null);
 
   const handleSubmit = useCallback(async (data) => {
     try {
@@ -42,7 +41,7 @@ const ResetPassword = ({ navigation }) => {
       await schema.validate(data, {
         abortEarly: false,
       });
-      api.post("/forgotpassword", data);
+      api.post("/usuario/forgotpassword", data);
       navigation.navigate("FinishPassword");
       return;
     } catch (err) {
