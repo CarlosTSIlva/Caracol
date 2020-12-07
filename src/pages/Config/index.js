@@ -5,6 +5,7 @@ import { Text, Image, View, Switch } from "react-native";
 import { Header, Menu, Info, Modos, Estilo } from "./styles";
 import normalize from "../../utils/normalize";
 import { useTheme } from "../../components/Theme/ThemeProvider";
+import { useAuth } from "../../hooks/auth";
 
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
@@ -22,7 +23,7 @@ const Config = ({ navigation }) => {
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const cal_me = () => setisOff((previousState) => !previousState);
   const { setScheme, isDark } = useTheme();
-
+  const { dados } = useAuth();
   const { colors } = useTheme();
 
   const [dataLoader, setdataLoader] = useState(false);
@@ -81,7 +82,7 @@ const Config = ({ navigation }) => {
               fontFamily: "nunito-regular",
             }}
           >
-            Ielon Clésio
+            {dados?.data?.info.nome}
           </Text>
           <Text
             style={{
@@ -90,7 +91,7 @@ const Config = ({ navigation }) => {
               fontFamily: "nunito-regular",
             }}
           >
-            Morador Titular
+            {dados.data?.contas[0]?.tipo?.descricao}
           </Text>
         </View>
       </Menu>

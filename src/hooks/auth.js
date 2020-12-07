@@ -13,6 +13,8 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [cors, setCors] = useState([]);
+  const [eventos, setEventos] = useState([]);
 
   useEffect(() => {
     async function loadStorageData() {
@@ -29,13 +31,15 @@ const AuthProvider = ({ children }) => {
           status: JSON.parse(status[1]),
         });
       }
+
       setLoading(false);
     }
+
     loadStorageData();
   }, []);
 
   const singIn = useCallback(async ({ username, password, application }) => {
-    const response = await api.post("/authenticate", {
+    const response = await api.post("/usuario/authenticate", {
       application,
       password,
       username,
@@ -43,13 +47,17 @@ const AuthProvider = ({ children }) => {
 
     const { token, status } = response.data;
 
-    api.defaults.headers.Authorization = `Bearer ${token}`;
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     await AsyncStorage.multiSet([
       ["@Caracol:token", token],
       ["@Caracol:name", username],
       ["@Caracol:status", JSON.stringify(status)],
     ]);
+
+    api.get(`/usuario/info/${username}`).then((res) => {
+      setCors(res.data);
+    });
 
     setData({ token, status, username });
   }, []);
@@ -67,7 +75,9 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        dados: cors,
         token: data.token,
+        eventos: eventos,
         username: data.username,
         singIn,
         signOut,
