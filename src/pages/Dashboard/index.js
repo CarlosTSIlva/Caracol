@@ -36,7 +36,7 @@ const Dashboard = ({ navigation }) => {
   }
 
   return (
-    <View style={{ backgroundColor: colors.background }}>
+    <View style={{ backgroundColor: colors.background, paddingTop:10 }}>
       <ScrollView style={{ backgroundColor: colors.background }}>
         <Container style={{ backgroundColor: colors.background }}>
           <Settings
