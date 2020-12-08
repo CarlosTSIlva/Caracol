@@ -1,5 +1,5 @@
 export const lightColors = {
-  background: "#FFFFFF",
+  background: "#ffffff",
   backgroundHeader: "#f2f2f2",
   primary: "#512DA8",
   text: "#121212",

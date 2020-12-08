@@ -17,7 +17,7 @@ const Folder = () => {
       <ImageI
         source={require("../../../assets/logo.png")}
         style={{
-          marginLeft: normalize(268),
+          marginLeft: normalize(300),
           maxWidth: normalize(81),
           maxHeight: normalize(74),
           marginBottom: normalize(0),
@@ -27,7 +27,7 @@ const Folder = () => {
       <Text
         style={{
           color: "#fff",
-          marginLeft: normalize(248),
+          marginLeft: normalize(270),
           fontFamily: "nunito-bold",
           fontSize: normalize(18),
         }}
@@ -37,10 +37,9 @@ const Folder = () => {
       <Text
         style={{
           color: "#fff",
-          marginLeft: normalize(170),
+          marginLeft: normalize(165),
           fontFamily: "nunito-regular",
-          fontSize: normalize(14),
-          width: normalize(1200),
+          fontSize: normalize(15)
         }}
       >
         A sua casa onde você estiver.

@@ -30,7 +30,8 @@ const fetchFonts = () => {
 const ResetPassword = ({ navigation }) => {
   const [dataLoader, setdataLoader] = useState(false);
   const [check, setCheck] = useState(false);
-
+  const formRef = useRef(null);
+  
   const handleSubmit = useCallback(async (data) => {
     try {
       formRef.current?.setErrors({});

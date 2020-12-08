@@ -35,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
   const [check, setCheck] = useState(false);
   const formRef = useRef(null);
 
-  const [visible, setVisibility] = React.useState(false);
+  const [visible, setVisibility] = useState(false);
 
   const icon = !visible ? "eye-slash" : "eye";
 
@@ -63,7 +63,7 @@ const HomeScreen = ({ navigation }) => {
         if (err instanceof Yup.ValidationError) {
           Alert.alert(
             "Erro no login",
-            "Ocorreu um erro ao fazer longin, cheque as credenciais"
+            "Ocorreu um erro ao fazer login, cheque as credenciais"
           );
         }
       }
@@ -86,57 +86,57 @@ const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView>
       <StatusBar backgroundColor="black" />
-
       <Folder />
       <Container>
-        <View>
-          <TextPurple
+        <View style={{ marginBottom: normalize(30), marginTop: normalize(30) }}>
+          <Text
             style={{
               fontFamily: "nunito-bold",
-              marginTop: normalize(30),
-              marginLeft: normalize(-206),
-              fontSize: normalize(14),
+              color: "#000",
+              fontSize: normalize(18),
+              paddingLeft: normalize(10),
+              paddingTop: normalize(20),
+              textAlign: "left"
             }}
           >
             Seja bem-vindo(a)
-          </TextPurple>
-
-          <TextBlack
+          </Text>
+          <Text
             style={{
               fontFamily: "nunito-regular",
-              fontSize: normalize(13),
-              marginBottom: normalize(25),
-              marginLeft: normalize(-154),
+              color: "#000",
+              fontSize: normalize(14),
+              paddingLeft: normalize(10),
+              paddingTop: normalize(2),
+              textAlign: "left"
             }}
           >
             Faça seu login para continuar.
-          </TextBlack>
+          </Text>
         </View>
-
         <Form ref={formRef} onSubmit={handleSubmit}>
           <View2>
             <View>
               <Input
                 style={{
-                  height: normalize(50),
-                  width: normalize(265),
+                  height: normalize(54),
+                  width: normalize(360),
                   marginBottom: normalize(15),
                   paddingHorizontal: normalize(12),
                   paddingVertical: normalize(16),
                   marginTop: normalize(20),
-                  marginLeft: normalize(-15),
                   fontSize: normalize(15),
                 }}
                 name="username"
                 type="username"
-                placeholder="username"
+                placeholder="Username"
                 autoCorrect={false}
                 autoCapitalize="none"
               />
             </View>
             <View>
               <Image
-                style={{ width: normalize(37), height: normalize(32) }}
+                style={{ width: normalize(37), height: normalize(32), padding: normalize(3), }}
                 source={require("../../../assets/usericon.png")}
               />
             </View>
@@ -146,8 +146,8 @@ const HomeScreen = ({ navigation }) => {
             <View>
               <Input
                 style={{
-                  height: normalize(50),
-                  width: normalize(265),
+                  height: normalize(54),
+                  width: normalize(360),
                   marginBottom: normalize(15),
                   paddingHorizontal: normalize(12),
                   paddingVertical: normalize(16),
@@ -178,20 +178,22 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </View2>
 
-          <Esquecisenha onPress={() => navigation.navigate("ResetPassword")}>
-            <EsquecisenhaText style={{ fontFamily: "nunito-bold" }}>
+          <View style={{ alignItems: "flex-end" }} onPress={() => navigation.navigate("ResetPassword")}>
+            <Text style={{ fontFamily: "nunito-bold", fontSize: normalize(14), paddingEnd: normalize(14) }}>
               Esqueci a senha
-            </EsquecisenhaText>
-          </Esquecisenha>
+            </Text>
+          </View>
 
-          <CheckBox
-            label="Mantenha-me conectado"
-            labelStyle={{ color: "#000000", fontSize: normalize(15) }}
-            iconColor="#000000"
-            checkColor="#000000"
-            value={check}
-            onChange={handleCheck}
-          />
+          <View style={{ paddingLeft: normalize(10), paddingTop: normalize(10)}}>
+            <CheckBox
+              label="Mantenha-me conectado"
+              labelStyle={{ color: "#000000", fontSize: normalize(14), fontFamily: "nunito-bold" }}
+              iconColor="#000000"
+              checkColor="#000000"
+              value={check}
+              onChange={handleCheck}
+            />
+          </View>
           <ViewLogin onPress={() => formRef.current.submitForm()} title="Logar">
             <Text
               style={{
