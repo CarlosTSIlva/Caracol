@@ -113,7 +113,7 @@ const Dashboard = ({ navigation }) => {
             </View>
           </Settings>
         </Container>
-        <View>
+        <View style={{ marginLeft: normalize(12) }}>
           <Quadro>
             <Text style={{ color: colors.text, fontFamily: "nunito-regular" }}>
               Encomendas
@@ -159,7 +159,7 @@ const Dashboard = ({ navigation }) => {
           </Quadro>
         </View>
 
-        <Quadro>
+        <Quadro style={{ marginLeft: normalize(12) }}>
           <Text style={{ color: colors.text, fontFamily: "nunito-regular" }}>
             Proxima Reservas
           </Text>
