@@ -31,7 +31,7 @@ const ResetPassword = ({ navigation }) => {
   const [dataLoader, setdataLoader] = useState(false);
   const [check, setCheck] = useState(false);
   const formRef = useRef(null);
-  
+
   const handleSubmit = useCallback(async (data) => {
     try {
       formRef.current?.setErrors({});
@@ -74,30 +74,33 @@ const ResetPassword = ({ navigation }) => {
     <ScrollView>
       <StatusBar backgroundColor="black" />
       <Folder />
-
       <Container>
-        <View>
-          <TextPurple
-            style={{
-              fontFamily: "nunito-bold",
-              marginTop: normalize(30),
-              marginLeft: normalize(-185),
-              fontSize: normalize(14),
-            }}
+        <View style={{ marginBottom: normalize(30), marginTop: normalize(30) }}>
+          <Text
+              style={{
+                fontFamily: "nunito-bold",
+                color: "#000",
+                fontSize: normalize(18),
+                paddingLeft: normalize(10),
+                paddingTop: normalize(20),
+                textAlign: "left"
+              }}
           >
             Esqueci minha senha
-          </TextPurple>
+          </Text>
 
-          <TextBlack
+          <Text
             style={{
               fontFamily: "nunito-regular",
-              fontSize: normalize(13),
-              marginBottom: normalize(25),
-              marginLeft: normalize(-60),
+              color: "#000",
+              fontSize: normalize(14),
+              paddingLeft: normalize(10),
+              paddingTop: normalize(2),
+              textAlign: "left"
             }}
           >
             Informe seu usuário abaixo para recuperá-la.
-          </TextBlack>
+          </Text>
         </View>
 
         <Form ref={formRef} onSubmit={handleSubmit}>
@@ -105,17 +108,17 @@ const ResetPassword = ({ navigation }) => {
             <View>
               <Input
                 style={{
-                  height: normalize(50),
-                  width: normalize(325),
+                  height: normalize(54),
+                  width: normalize(360),
                   marginBottom: normalize(15),
                   paddingHorizontal: normalize(12),
-                  paddingVertical: normalize(13),
+                  paddingVertical: normalize(16),
                   marginTop: normalize(20),
                   fontSize: normalize(15),
                 }}
                 name="username"
                 type="username"
-                placeholder="username"
+                placeholder="Username"
                 autoCorrect={false}
                 autoCapitalize="none"
               />
@@ -131,7 +134,7 @@ const ResetPassword = ({ navigation }) => {
           <Esquecisenha>
             <Image
               onPress={() => navigation.navigate("HomeScreen")}
-              style={{ width: normalize(22), height: normalize(20) }}
+              style={{ width: normalize(22), height: normalize(20), marginLeft: normalize(10) }}
               source={require("../../../assets/seta.png")}
             />
             <EsquecisenhaText
@@ -151,7 +154,7 @@ const ResetPassword = ({ navigation }) => {
             >
               Recuperar
             </Text>
-          </ViewLogin>
+          </ViewLogin>          
         </Form>
       </Container>
     </ScrollView>

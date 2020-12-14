@@ -54,11 +54,12 @@ export const View2 = styled.View`
 `;
 
 export const ViewLogin = styled.TouchableOpacity`
-  height: ${normalize(56)}px;
-  width: ${normalize(327)}px;
+  height: ${normalize(55)}px;
+  width: ${normalize(400)}px; 
   border-radius: ${normalize(5)}px;
   background-color: #6f2da8;
-  margin-top: 293px;
+  margin-left: ${normalize(10)}px;
+  margin-top: ${normalize(35)}%;
   justify-content: center;
   align-items: center;
 `;

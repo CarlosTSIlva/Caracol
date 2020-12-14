@@ -55,7 +55,7 @@ const HomeScreen = ({ navigation }) => {
         if (err instanceof Yup.ValidationError) {
           Alert.alert(
             "Erro no login",
-            "Ocorreu um erro ao fazer login, cheque as credenciais"
+            "Ocorreu um erro ao fazer longin, cheque as credenciais"
           );
         }
       }
@@ -174,6 +174,7 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </View2>
 
+<<<<<<< HEAD
           <View
             style={{ alignItems: "flex-end" }}
             onPress={() => navigation.navigate("ResetPassword")}
@@ -185,10 +186,17 @@ const HomeScreen = ({ navigation }) => {
                 paddingEnd: normalize(14),
               }}
             >
+=======
+          <View style={{ alignItems: "flex-end" }} onPress={() => navigation.navigate("ResetPassword")}>
+            <Text 
+              onPress={() => navigation.navigate("ResetPassword")}
+              style={{ fontFamily: "nunito-bold", fontSize: normalize(14), paddingEnd: normalize(14) }}>
+>>>>>>> c736cf98895a6637c6a388943083a1f40bb4d180
               Esqueci a senha
             </Text>
           </View>
 
+<<<<<<< HEAD
           <View
             style={{ paddingLeft: normalize(10), paddingTop: normalize(10) }}
           >
@@ -205,6 +213,18 @@ const HomeScreen = ({ navigation }) => {
               onChange={handleCheck}
             />
           </View>
+=======
+          
+
+          <CheckBox
+            label="Mantenha-me conectado"
+            labelStyle={{ color: "#000000", fontSize: normalize(14), fontFamily: "nunito-bold" }}
+            iconColor="#000000"
+            checkColor="#000000"
+            value={check}
+            onChange={handleCheck}
+          />
+>>>>>>> c736cf98895a6637c6a388943083a1f40bb4d180
           <ViewLogin onPress={() => formRef.current.submitForm()} title="Logar">
             <Text
               style={{
