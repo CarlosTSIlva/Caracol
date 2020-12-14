@@ -13,6 +13,17 @@ export const ImageI = styled.Image`
   margin-bottom: ${normalize(10)}px;
 `;
 
+export const Esquecisenha = styled.Text`
+  align-items: flex-end;
+  margin-top: ${normalize(-20)}px;
+`;
+
+export const EsquecisenhaText = styled.Text`
+  color: white;
+  font-size: ${normalize(13)}px;
+  color: black;
+`;
+
 export const View2 = styled.View`
   display: flex;
   flex-direction: row;
@@ -35,9 +46,12 @@ export const ViewLogin = styled.TouchableOpacity`
   border-radius: ${normalize(5)}px;
   background-color: #6f2da8;
   margin-left: ${normalize(10)}px;
-  margin-top: ${normalize(20)}%;
+  margin-top: ${normalize(35)}%;
   justify-content: center;
   align-items: center;
 `;
 
-
+export const TextLogin = styled.Text`
+  color: white;
+  font-size: ${normalize(18)}px;
+`;
