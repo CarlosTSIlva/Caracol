@@ -31,7 +31,6 @@ const Dashboard = ({ navigation }) => {
   const { signOut, dados } = useAuth();
   const [encomendas, setEncomendas] = useState([]);
   const [reservas, setReservas] = useState([]);
-
   useEffect(
     (async) => () => {
       api
@@ -58,7 +57,13 @@ const Dashboard = ({ navigation }) => {
   );
 
   return (
-    <View style={{ backgroundColor: colors.background, paddingTop:10 }}>
+    <View
+      style={{
+        backgroundColor: colors.background,
+        paddingTop: normalize(10),
+        paddingBottom: normalize(38),
+      }}
+    >
       <ScrollView style={{ backgroundColor: colors.background }}>
         <Container style={{ backgroundColor: colors.background }}>
           <Settings
@@ -217,7 +222,7 @@ const Dashboard = ({ navigation }) => {
             Home
           </Text>
         </Menu>
-        <Menu>
+        <Menu onPress={() => navigation.navigate("Produtos")}>
           <Image
             style={{
               width: normalize(20),

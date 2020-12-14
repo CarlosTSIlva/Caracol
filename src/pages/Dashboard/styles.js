@@ -4,7 +4,6 @@ import normalize from "../../utils/normalize";
 export const Container = styled.View`
   flex: 1;
   align-items: center;
-  background-color: #ffffff;
 `;
 
 export const Settings = styled.View`
@@ -41,7 +40,7 @@ export const Navegaçao = styled.View`
   margin-top: ${normalize(1)}px;
 `;
 
-export const Menu = styled.View`
+export const Menu = styled.TouchableOpacity`
   background-color: #6f2da8;
   width: ${normalize(82)}px;
   height: ${normalize(68)}px;

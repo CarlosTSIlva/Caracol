@@ -1,15 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 
 import { StatusBar, View, Text, Alert, Image, ScrollView } from "react-native";
-import {
-  Container,
-  Esquecisenha,
-  EsquecisenhaText,
-  View2,
-  TextBlack,
-  ViewLogin,
-  TextPurple,
-} from "./styles";
+import { Container, View2, ViewLogin } from "./styles";
 import Icon from "react-native-vector-icons/FontAwesome";
 import normalize from "../../utils/normalize";
 
@@ -96,7 +88,7 @@ const HomeScreen = ({ navigation }) => {
               fontSize: normalize(18),
               paddingLeft: normalize(10),
               paddingTop: normalize(20),
-              textAlign: "left"
+              textAlign: "left",
             }}
           >
             Seja bem-vindo(a)
@@ -108,7 +100,7 @@ const HomeScreen = ({ navigation }) => {
               fontSize: normalize(14),
               paddingLeft: normalize(10),
               paddingTop: normalize(2),
-              textAlign: "left"
+              textAlign: "left",
             }}
           >
             Faça seu login para continuar.
@@ -136,7 +128,11 @@ const HomeScreen = ({ navigation }) => {
             </View>
             <View>
               <Image
-                style={{ width: normalize(37), height: normalize(32), padding: normalize(3), }}
+                style={{
+                  width: normalize(37),
+                  height: normalize(32),
+                  padding: normalize(3),
+                }}
                 source={require("../../../assets/usericon.png")}
               />
             </View>
@@ -178,16 +174,31 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </View2>
 
-          <View style={{ alignItems: "flex-end" }} onPress={() => navigation.navigate("ResetPassword")}>
-            <Text style={{ fontFamily: "nunito-bold", fontSize: normalize(14), paddingEnd: normalize(14) }}>
+          <View
+            style={{ alignItems: "flex-end" }}
+            onPress={() => navigation.navigate("ResetPassword")}
+          >
+            <Text
+              style={{
+                fontFamily: "nunito-bold",
+                fontSize: normalize(14),
+                paddingEnd: normalize(14),
+              }}
+            >
               Esqueci a senha
             </Text>
           </View>
 
-          <View style={{ paddingLeft: normalize(10), paddingTop: normalize(10)}}>
+          <View
+            style={{ paddingLeft: normalize(10), paddingTop: normalize(10) }}
+          >
             <CheckBox
               label="Mantenha-me conectado"
-              labelStyle={{ color: "#000000", fontSize: normalize(14), fontFamily: "nunito-bold" }}
+              labelStyle={{
+                color: "#000000",
+                fontSize: normalize(14),
+                fontFamily: "nunito-bold",
+              }}
               iconColor="#000000"
               checkColor="#000000"
               value={check}
